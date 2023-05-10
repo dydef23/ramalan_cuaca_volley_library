@@ -62,7 +62,7 @@ public class WeatherAdapter extends RecyclerView.Adapter {
         VHWeather vh = (VHWeather) holder;
         Weather w = this.data.get(position);
 
-        Format f = new SimpleDateFormat("EEEE");
+//        Format f = new SimpleDateFormat("EEEE");
 //        String getDay = f.format(w.day);
 //        Log.i("Hari", getDay);
 
