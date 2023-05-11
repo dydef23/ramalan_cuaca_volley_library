@@ -5,6 +5,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -12,8 +13,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.RecyclerView.ViewHolder;
 
 import java.text.Format;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class WeatherAdapter extends RecyclerView.Adapter {
@@ -33,12 +37,14 @@ public class WeatherAdapter extends RecyclerView.Adapter {
 
     class VHWeather extends RecyclerView.ViewHolder  {
 
-        TextView day, temp, weather;
+        TextView day, weather;
+        ImageView weatherImg;
 
         public VHWeather(@NonNull View itemView) {
             super(itemView);
             this.day = itemView.findViewById(R.id.tvDay);
             this.weather = itemView.findViewById(R.id.tvDayWeather);
+            this.weatherImg = itemView.findViewById(R.id.imgDayWeather);
         }
     }
 
@@ -62,12 +68,23 @@ public class WeatherAdapter extends RecyclerView.Adapter {
         VHWeather vh = (VHWeather) holder;
         Weather w = this.data.get(position);
 
-//        Format f = new SimpleDateFormat("EEEE");
-//        String getDay = f.format(w.day);
-//        Log.i("Hari", getDay);
+        LocalDate date = LocalDate.parse(w.day);
 
+        if(vh.getAdapterPosition() == 0){
+            vh.day.setText("Today");
+        } else if (vh.getAdapterPosition() == 1) {
+            vh.day.setText("Tomorrow");
+        } else{
+            String temp = String.valueOf(date.getDayOfWeek());
+            vh.day.setText(String.valueOf(dayFormat(temp)));
+        }
+        vh.weatherImg.setImageResource(Helper.getIcon(Integer.parseInt(w.code)));
         vh.weather.setText(w.weather);
-        vh.day.setText(w.day);
+    }
+
+    public String dayFormat(String n){
+        String temp = n.substring(0,1) + n.substring(1).toLowerCase();
+        return temp;
     }
 
     @Override

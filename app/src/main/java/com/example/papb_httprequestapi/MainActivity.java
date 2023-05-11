@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.ImageView;
 import android.widget.TextView;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -26,14 +27,13 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     TextView city, weather, degree;
+    ImageView imgWeather;
     RequestQueue reqQue;
     JSONObject jsonObj, jsonDay;
     WeatherAdapter wAdapter;
     RecyclerView rvWeather;
     List<Weather> dataWeather;
-    String [] time;
-    String [] code;
-    String w, type;
+    String w, type, test;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
         city = findViewById(R.id.tvCity);
         weather = findViewById(R.id.tvWeather);
         degree = findViewById(R.id.tvTempDegree);
+        imgWeather = findViewById(R.id.imgWeather);
         rvWeather = findViewById(R.id.rvWeatherDay);
         dataWeather = new ArrayList<>();
 
@@ -64,6 +65,7 @@ public class MainActivity extends AppCompatActivity {
         switch (n){
             case 0:
                 w = "Clear Sky";
+                test = "img_sun";
                 break;
             case 1:
                 w = "Mainly Clear";
@@ -78,20 +80,16 @@ public class MainActivity extends AppCompatActivity {
                 w = "Fog";
                 break;
             case 48:
-                w = "Depositing";
-                type = "Rime Fog";
+                w = "Fog";
                 break;
             case 51:
                 w = "Drizzle";
-                type = "Light";
                 break;
             case 53:
                 w = "Drizzle";
-                type = "Moderate";
                 break;
             case 55:
                 w = "Drizzle";
-                type = "Dense Intensity";
                 break;
             case 56:
                 w = "Freezing Drizzle";
@@ -122,15 +120,15 @@ public class MainActivity extends AppCompatActivity {
                 type = "Heavy Intensity";
                 break;
             case 71:
-                w = "Snow Fall";
+                w = "Snow";
                 type = "Slight";
                 break;
             case 73:
-                w = "Snow Fall";
+                w = "Snow";
                 type = "Moderate";
                 break;
             case 75:
-                w = "Snow Fall";
+                w = "Snow";
                 type = "Heavy Intensity";
                 break;
             case 77:
@@ -189,13 +187,16 @@ public class MainActivity extends AppCompatActivity {
                         String code = jsonDay.getJSONArray("weathercode").getString(i);
                         castWheater(Integer.parseInt(code));
 
-                        dataWeather.add(new Weather(time, w));
+                        dataWeather.add(new Weather(time, w, code));
                     }
                     initData();
 
-                    degree.setText(jsonObj.getString("temperature"));
                     String temp = jsonObj.getString("weathercode");
+                    int wCodeToday = Integer.parseInt(jsonObj.getString("weathercode"));
+                    degree.setText(jsonObj.getString("temperature"));
                     weather.setText(castWheater(Integer.parseInt(temp)));
+                    imgWeather.setImageResource(Helper.getIcon(wCodeToday));
+
                 } catch (JSONException e) {
                     throw new RuntimeException(e);
                 }
