@@ -2,10 +2,10 @@ package com.example.papb_httprequestapi;
 
 public class Weather {
 
-    String day, code, weather;
+    String date, code, weather;
 
-    public Weather(String day, String weather, String code){
-        this.day = day;
+    public Weather(String date, String weather, String code){
+        this.date = date;
         this.weather = weather;
         this.code = code;
     }

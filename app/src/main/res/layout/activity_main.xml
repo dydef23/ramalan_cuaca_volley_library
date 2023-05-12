@@ -36,7 +36,7 @@
         android:id="@+id/tvCity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Malang"
+        android:text="City"
         android:textColor="@color/black"
         android:textSize="24sp"
         app:layout_constraintStart_toStartOf="parent"
@@ -53,13 +53,15 @@
         app:layout_constraintStart_toStartOf="@+id/textView6" />
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/cvWeatherDay"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginTop="32dp"
+        android:layout_marginBottom="32dp"
         android:elevation="10dp"
         app:cardCornerRadius="10dp"
         app:cardElevation="10dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/textView3"
         app:layout_constraintTop_toBottomOf="@+id/tvTempDegree"
         tools:layout_editor_absoluteX="30dp">
 
@@ -72,6 +74,7 @@
             android:paddingTop="20dp"
             android:paddingEnd="15dp"
             android:paddingBottom="20dp" />
+
     </androidx.cardview.widget.CardView>
 
     <ImageView
@@ -82,5 +85,43 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/tvCity"
         app:srcCompat="@drawable/baseline_wb_sunny_24" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:text="Wind Speed"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/tvWindSpeed"
+        app:layout_constraintEnd_toEndOf="@+id/textView7"
+        app:layout_constraintStart_toStartOf="@+id/tvWindSpeed" />
+
+    <TextView
+        android:id="@+id/tvWindSpeed"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:text="TextView"
+        android:textColor="@color/black"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/textView7"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/textView7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="km/h"
+        android:textColor="@color/black"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="@+id/tvWindSpeed"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/tvWindSpeed" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

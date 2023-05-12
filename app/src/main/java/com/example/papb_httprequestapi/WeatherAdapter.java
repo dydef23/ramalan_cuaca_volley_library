@@ -25,11 +25,6 @@ public class WeatherAdapter extends RecyclerView.Adapter {
     Context ctx;
     List<Weather> data;
 
-    public WeatherAdapter (Context context, List<Weather> data){
-        this.ctx = context;
-        this.data = data;
-    }
-
     public WeatherAdapter (Context context){
         this.ctx = context;
         this.data = new ArrayList<>();
@@ -68,7 +63,7 @@ public class WeatherAdapter extends RecyclerView.Adapter {
         VHWeather vh = (VHWeather) holder;
         Weather w = this.data.get(position);
 
-        LocalDate date = LocalDate.parse(w.day);
+        LocalDate date = LocalDate.parse(w.date);
 
         if(vh.getAdapterPosition() == 0){
             vh.day.setText("Today");
